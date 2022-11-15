@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WebBanGiayConverse.Models.SanPham>
+
+<div class="content-top">
+    <div class="grid-in">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 grid-top">
+                <a href="@Url.Action("XemChiTiet","SanPham", new { id = item.ID })" class="b-link-stripe b-animate-go  thickbox">
+                    <img class="img-responsive" src="@Url.Content(item.Anh)" alt="">
+                    <div class="b-wrapper">
+                        <h3 class="b-animate b-from-left b-delay03 ">
+                            <span>@item.Gia Đ</span>
+                        </h3>
+                    </div>
+                </a>
+                <p><a href="single.html">@item.Ten</a></p>
+            </div>
+        }
+    </div>
+</div>

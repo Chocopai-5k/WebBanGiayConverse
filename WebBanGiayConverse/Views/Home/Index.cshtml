@@ -1,0 +1,29 @@
+﻿@using WebBanGiayConverse.Models
+@model IEnumerable<SanPham>
+
+@{ 
+    IEnumerable<SanPham> lstConverse = (IEnumerable<SanPham>)ViewBag.ListConverse;
+    IEnumerable<SanPham> lstVan = (IEnumerable<SanPham>)ViewBag.ListVan;
+}
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+<div class="container">
+    <div class="grid-in">
+    <h1>Giày Converse</h1>
+        @Html.Partial("~/Views/SanPham/SanPhamStyle1.cshtml", lstConverse)
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="container">
+    <div class="grid-in">
+    <h1>Giày Vans</h1>
+        @Html.Partial("~/Views/SanPham/SanPhamStyle1.cshtml", lstVan)
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+   
+   
+
