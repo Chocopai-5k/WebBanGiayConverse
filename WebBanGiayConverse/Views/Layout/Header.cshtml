@@ -1,0 +1,106 @@
+﻿@using WebBanGiayConverse.Models
+
+<link rel="stylesheet" href="~/Content/css/LoginForm.css" />
+<link rel="stylesheet" href="~/Content/css/fontawesome-free-6.2.1-web/css/all.css"/>
+<div class="header-top">
+    <div class="container">
+        <div class="search">
+            <form>
+                <input type="text" value="Search " onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                <input type="submit" value="Go">
+            </form>
+        </div>
+        <div class="header-left">
+            <ul>
+                @if (Session["TaiKhoan"] != null && Session["TaiKhoan"] != "")
+                {
+                    NguoiDung nd = (NguoiDung)Session["TaiKhoan"];
+                    <li style="margin:5px;color:wheat">Chào @nd.Ten</li>
+                    @Html.ActionLink("Đăng xuất","DangXuat","Home")
+                }else
+                {
+                    <li><a id="btnDangNhap" class="lock" href="#">Đăng nhập</a></li>
+                    <li>
+                        <a href="@Url.Action("DangKi","Home")">Đăng kí</a></li>
+                        }
+                </ul>
+            <div class="cart box_1">
+                <a href="checkout.html">
+                    <h3>
+                        <div class="total">
+                            <span class="simpleCart_total">$595.00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">2</span> items)
+                        </div>
+                        <img src="/Content/images/cart.png" alt="">
+                    </h3>
+                </a>
+                <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<div id="popup_login">
+    <div class="login-form">
+        <h2>Đăng nhập</h2>
+        <div class="icon_close">
+        <i id="close_form" class="fa-solid fa-xmark"></i>
+
+        </div>
+        <div class="form-info">
+            @using (Html.BeginForm("DangNhap", "Home"))
+            {
+              
+                <input type="text" class="email" name="txtDangNhap" placeholder="Tài khoản" required="" />
+                <input type="password" class="password" name="txtMatKhau" placeholder="Mật khẩu" required="" />
+                <p><a href="#">Quên mật khẩu?</a></p>
+                <ul class="login-buttons">
+                    <li><input type="submit" value="Đăng nhập" /></li>
+                    <li><a href="#" class="hvr-sweep-to-left">Đăng kí</a></li>
+                    <div class="clear"> </div>
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+<style>
+    .icon_close{
+        text-align:right;
+        font-size:24px;
+        color:rebeccapurple;
+        display:block;
+        margin-top: -38px;
+    }
+     .icon_close i {
+            width: 30px;
+            text-align:center;
+            cursor:pointer;
+      }
+     .icon_close i:hover{
+         background-color:bisque;
+
+     }
+
+    #popup_login {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 99;
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    $("#btnDangNhap").click(function () {
+        $("#popup_login").show()
+
+    });
+    $("#close_form").click(anForm) 
+        //function ẩn form
+        function anForm() {
+            $("#popup_login").hide()
+        }
+</script>
