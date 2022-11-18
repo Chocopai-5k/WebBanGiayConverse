@@ -19,6 +19,7 @@ namespace WebBanGiayConverse.Models
         public Nullable<long> IDSanPham { get; set; }
         public Nullable<double> Gia { get; set; }
         public Nullable<double> SoLuong { get; set; }
+        public string TenSp { get; set; }
     
         public virtual HoaDon HoaDon { get; set; }
         public virtual SanPham SanPham { get; set; }

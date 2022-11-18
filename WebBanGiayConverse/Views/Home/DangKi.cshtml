@@ -15,20 +15,29 @@
             <div>
                 <span>Họ và tên</span>
                 @Html.TextBox("Ten")
+                <p style="color:rebeccapurple">
+                @Html.ValidationMessageFor(model=>model.Ten)
+
+                </p>
             </div>
             <div>
                 <span>Email</span>
                 @Html.TextBox("Email")
+                @Html.ValidationMessageFor(model => model.Email)
+
 
             </div>
             <div>
                 <span>Địa chỉ</span>
                 @Html.TextBox("DiaChi")
+                @Html.ValidationMessageFor(model => model.DiaChi)
+
 
             </div>
             <div>
                 <span>Số điện thoại</span>
                 @Html.TextBox("SoDienThoai")
+                @Html.ValidationMessageFor(model => model.SoDienThoai)
 
             </div>
 
@@ -38,17 +47,19 @@
             <div>
                 <span>Tài khoản</span>
                 @Html.TextBox("TaiKhoan")
+                @Html.ValidationMessageFor(model => model.TaiKhoan)
+
 
             </div>
             <div>
                 <span>Mật khẩu</span>
                 @Html.Password("MatKhau")
+                @Html.ValidationMessageFor(model => model.MatKhau)
 
             </div>
             <div>
                 <span>Nhập lại mật khẩu</span>
                 @Html.Password("NhapLaiMatKhau")
-
             </div>
             <div>
                 @Html.MathCaptcha()

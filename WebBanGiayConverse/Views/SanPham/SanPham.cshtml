@@ -19,7 +19,7 @@
                     </a>
                 </div>
                 <p class="tun">@item.Ten</p>
-                <a href="#" class="item_add"><p class="number item_price"><i> </i>@item.Gia Đ</p></a>
+                <a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSp = item.ID, @strURL = Request.Url.ToString()})" class="item_add"><p class="number item_price"><i> </i>@item.Gia.Value.ToString("#,##") VNĐ</p></a>
             </div>
         }
 

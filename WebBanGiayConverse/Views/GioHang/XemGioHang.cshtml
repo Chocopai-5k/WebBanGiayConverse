@@ -1,0 +1,38 @@
+﻿@using WebBanGiayConverse.Models
+@model List<ItemGioHang>
+@{
+    ViewBag.Title = "XemGioHang";
+    Layout = "~/Views/Layout/ProductLayout.cshtml";
+}
+
+@if(Model == null)
+{
+<h1>Giỏ hàng rỗng</h1>
+}
+else
+{
+    <table class="table" style="width:75% ">
+        <tr>
+            <td>Mã SP</td>
+            <td>Tên SP</td>
+            <td>Hình ảnh</td>
+            <td>Số lượng</td>
+            <td>Đơn Giá</td>
+            <td>Thành tiền</td>
+        </tr>
+        @foreach(var item in Model)
+        {
+        <tr>
+            <td>@item.IDSanPham</td>
+            <td>@item.TenSp</td>
+            <td>
+                <img src="@Url.Content(item.HinhAnh)" width="80px" height="80px"/>
+            </td>
+            <td>@item.SoLuong</td>
+            <td>@item.Gia.ToString("#,##") VNĐ</td>
+            <td>@item.ThanhTien.ToString("#,##") VNĐ</td>
+        </tr>
+        }
+    </table>
+}
+

@@ -1,4 +1,5 @@
-﻿@using WebBanGiayConverse.Models
+﻿@using System.Web.Mvc.Ajax
+@using WebBanGiayConverse.Models
 
 <link rel="stylesheet" href="~/Content/css/LoginForm.css" />
 <link rel="stylesheet" href="~/Content/css/fontawesome-free-6.2.1-web/css/all.css"/>
@@ -24,18 +25,8 @@
                         <a href="@Url.Action("DangKi","Home")">Đăng kí</a></li>
                         }
                 </ul>
-            <div class="cart box_1">
-                <a href="checkout.html">
-                    <h3>
-                        <div class="total">
-                            <span class="simpleCart_total">$595.00</span> (<span id="simpleCart_quantity" class="simpleCart_quantity">2</span> items)
-                        </div>
-                        <img src="/Content/images/cart.png" alt="">
-                    </h3>
-                </a>
-                <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-
-            </div>
+           @* Chenf partial gio hang vao layout*@
+            @Html.Action("GioHangPartial", "GioHang");
             <div class="clearfix"> </div>
         </div>
         <div class="clearfix"> </div>
@@ -49,18 +40,25 @@
 
         </div>
         <div class="form-info">
-            @using (Html.BeginForm("DangNhap", "Home"))
+            @using (Ajax.BeginForm("DangNhap", "Home", new AjaxOptions
             {
-              
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "ThongBaoSai"
+            }))
+            {
+
                 <input type="text" class="email" name="txtDangNhap" placeholder="Tài khoản" required="" />
                 <input type="password" class="password" name="txtMatKhau" placeholder="Mật khẩu" required="" />
+
                 <p><a href="#">Quên mật khẩu?</a></p>
+                <h3 id="ThongBaoSai" style="color:palevioletred"></h3>
+
                 <ul class="login-buttons">
                     <li><input type="submit" value="Đăng nhập" /></li>
                     <li><a href="#" class="hvr-sweep-to-left">Đăng kí</a></li>
-                    <div class="clear"> </div>
                 </ul>
             }
+                    <div class="clear"> </div>
         </div>
     </div>
 </div>

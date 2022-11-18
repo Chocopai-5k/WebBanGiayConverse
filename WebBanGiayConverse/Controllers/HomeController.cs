@@ -40,10 +40,17 @@ namespace WebBanGiayConverse.Controllers
             //Kiểm tra captcha hơp lệ
             if(this.IsCaptchaValid("Captcha không hợp lệ "))
             {
-                ViewBag.ThongBao = "Đăng kí thành công";
-                //Thêm khách hàng vào csdl
-                db.NguoiDungs.Add(nd);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    ViewBag.ThongBao = "Đăng kí thành công";
+                    //Thêm khách hàng vào csdl
+                    db.NguoiDungs.Add(nd);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.ThongBao = "Đăng kí thất bại";
+                }
                 return View();
             }
             ViewBag.ThongBao = "Mã captcha không đúng";
@@ -60,9 +67,12 @@ namespace WebBanGiayConverse.Controllers
             if (nd != null)
             {
                 Session["TaiKhoan"] = nd;
+                //return Content("<script>window.location.reload()</script>");
                 return RedirectToAction("Index");
             }
+
             return RedirectToAction("Index");
+            //return Content("Tài khoản hoặc mật khẩu không đúng");
         }
         //[ChildActionOnly]
         public ActionResult DangXuat()

@@ -14,6 +14,7 @@
           <Property Name="IDSanPham" Type="bigint" />
           <Property Name="Gia" Type="float" />
           <Property Name="SoLuong" Type="float" />
+          <Property Name="TenSp" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="HoaDon">
           <Key>
@@ -52,7 +53,6 @@
           </Key>
           <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="nvarchar(max)" />
-          <Property Name="Gia" Type="nvarchar" MaxLength="50" />
           <Property Name="NgaySanXuat" Type="date" />
           <Property Name="CoSan" Type="bit" />
           <Property Name="IDLoaiSanPham" Type="bigint" />
@@ -62,6 +62,7 @@
           <Property Name="Anh2" Type="nvarchar(max)" />
           <Property Name="Anh3" Type="nvarchar(max)" />
           <Property Name="Anh4" Type="nvarchar(max)" />
+          <Property Name="Gia" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -183,6 +184,7 @@
           <Property Name="IDSanPham" Type="Int64" />
           <Property Name="Gia" Type="Double" />
           <Property Name="SoLuong" Type="Double" />
+          <Property Name="TenSp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HoaDon" Relationship="Self.FK_ChiTietHoaDon_HoaDon" FromRole="ChiTietHoaDon" ToRole="HoaDon" />
           <NavigationProperty Name="SanPham" Relationship="Self.FK_ChiTietHoaDon_SanPham" FromRole="ChiTietHoaDon" ToRole="SanPham" />
         </EntityType>
@@ -228,7 +230,6 @@
           </Key>
           <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Gia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgaySanXuat" Type="DateTime" Precision="0" />
           <Property Name="CoSan" Type="Boolean" />
           <Property Name="IDLoaiSanPham" Type="Int64" />
@@ -238,6 +239,7 @@
           <Property Name="Anh2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Anh3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Anh4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gia" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK_ChiTietHoaDon_SanPham" FromRole="SanPham" ToRole="ChiTietHoaDon" />
           <NavigationProperty Name="TheLoai" Relationship="Self.FK_SanPham_TheLoai" FromRole="SanPham" ToRole="TheLoai" />
         </EntityType>
@@ -362,6 +364,7 @@
                 <ScalarProperty Name="IDSanPham" ColumnName="IDSanPham" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="TenSp" ColumnName="TenSp" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -404,7 +407,6 @@
               <MappingFragment StoreEntitySet="SanPham">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="Gia" ColumnName="Gia" />
                 <ScalarProperty Name="NgaySanXuat" ColumnName="NgaySanXuat" />
                 <ScalarProperty Name="CoSan" ColumnName="CoSan" />
                 <ScalarProperty Name="IDLoaiSanPham" ColumnName="IDLoaiSanPham" />
@@ -414,6 +416,7 @@
                 <ScalarProperty Name="Anh2" ColumnName="Anh2" />
                 <ScalarProperty Name="Anh3" ColumnName="Anh3" />
                 <ScalarProperty Name="Anh4" ColumnName="Anh4" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

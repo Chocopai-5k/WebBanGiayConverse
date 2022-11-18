@@ -22,7 +22,6 @@ namespace WebBanGiayConverse.Models
     
         public long ID { get; set; }
         public string Ten { get; set; }
-        public string Gia { get; set; }
         public Nullable<System.DateTime> NgaySanXuat { get; set; }
         public Nullable<bool> CoSan { get; set; }
         public Nullable<long> IDLoaiSanPham { get; set; }
@@ -32,6 +31,7 @@ namespace WebBanGiayConverse.Models
         public string Anh2 { get; set; }
         public string Anh3 { get; set; }
         public string Anh4 { get; set; }
+        public Nullable<decimal> Gia { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
