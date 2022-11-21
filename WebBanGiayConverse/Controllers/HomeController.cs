@@ -67,12 +67,12 @@ namespace WebBanGiayConverse.Controllers
             if (nd != null)
             {
                 Session["TaiKhoan"] = nd;
-                //return Content("<script>window.location.reload()</script>");
-                return RedirectToAction("Index");
+                return Content("<script>window.location.reload();</script>");
+                //return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
-            //return Content("Tài khoản hoặc mật khẩu không đúng");
+            //return RedirectToAction("Index");
+            return Content("Tài khoản hoặc mật khẩu không đúng");
         }
         //[ChildActionOnly]
         public ActionResult DangXuat()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebBanGiayConverse.Models;
+using PagedList;
 
 namespace WebBanGiayConverse.Controllers
 {
@@ -35,7 +36,7 @@ namespace WebBanGiayConverse.Controllers
             return View(sp);
         }
         //Load sản phẩm theo mã loại sản phẩm
-       public ActionResult SanPham(int? IDLoaiSP)
+       public ActionResult SanPham(int? IDLoaiSP, int? page)
         {
             if(IDLoaiSP == null)
             {
@@ -48,7 +49,16 @@ namespace WebBanGiayConverse.Controllers
                 //Thông báo nếu không có sản phẩm 
                 return HttpNotFound();
             }
-            return View(lstSP);
+            if(Request.HttpMethod != "GET")
+            {
+                page = 1;
+            }
+            //Thực hiện chức năng phân trang
+            int pageSize = 2;
+            //Số trang hiện tại
+            int pageNumber = (page ?? 1);
+            ViewBag.MaLoaiSP = IDLoaiSP;
+            return View(lstSP.OrderBy(n=>n.ID).ToPagedList(pageNumber, pageSize));
         }
     }
 }

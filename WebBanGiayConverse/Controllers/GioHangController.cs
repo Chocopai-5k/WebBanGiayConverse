@@ -96,5 +96,110 @@ namespace WebBanGiayConverse.Controllers
             List<ItemGioHang> lstGioHang = LayGioHang();
             return View(lstGioHang);
         }
+        //Chỉnh sửa giỏ hàng
+        public ActionResult SuaGioHang(int MaSp)
+        {
+            //Kiểm tra session giỏ hàng tồn tại chưa
+            if (Session["GioHang"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
+            SanPham sp = db.SanPhams.SingleOrDefault(n => n.ID == MaSp);
+            if (sp == null)
+            {
+                /*Đường dẫn không hợp lệ*/
+                Response.StatusCode = 404;
+                return null;
+            }
+            //Lấy list giỏ hàng từ session
+            List<ItemGioHang> lstGioHang = LayGioHang();
+            ItemGioHang spCheck = lstGioHang.SingleOrDefault(n => n.IDSanPham == MaSp);
+            if(spCheck == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            //Lấy list gio hang bang tao giao dien
+            ViewBag.GioHang = lstGioHang;
+            return View(spCheck);
+        }
+        //Cập nhật giỏ hàng
+        [HttpPost]
+        public ActionResult CapNhatGioHang(ItemGioHang itemGH)
+            {
+            SanPham spCheck = db.SanPhams.Single(n => n.ID == itemGH.IDSanPham);
+            if (spCheck.CoSan == false)
+            {
+                return View("ThongBao");
+            }
+            //Cập nhật sô lượng trong giỏ hàng
+            List<ItemGioHang> lstGH = LayGioHang();
+
+            ItemGioHang itemGHUpdate = lstGH.Find(n => n.IDSanPham == itemGH.IDSanPham);
+
+            itemGHUpdate.SoLuong = itemGH.SoLuong;
+            itemGHUpdate.ThanhTien = itemGHUpdate.SoLuong * itemGHUpdate.Gia;
+            return RedirectToAction("XemGioHang");
+        }
+        //Xóa giỏ hàng
+        public ActionResult XoaGioHang(int MaSp)
+        {
+            if (Session["GioHang"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
+            SanPham sp = db.SanPhams.SingleOrDefault(n => n.ID == MaSp);
+            if (sp == null)
+            {
+                /*Đường dẫn không hợp lệ*/
+                Response.StatusCode = 404;
+                return null;
+            }
+            //Lấy list giỏ hàng từ session
+            List<ItemGioHang> lstGioHang = LayGioHang();
+            ItemGioHang spCheck = lstGioHang.SingleOrDefault(n => n.IDSanPham == MaSp);
+            if (spCheck == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            lstGioHang.Remove(spCheck);
+            return RedirectToAction("XemGioHang");
+        }
+        public ActionResult ThemGioHangAjax(int MaSp, string strURL)
+        {
+            SanPham sp = db.SanPhams.SingleOrDefault(n => n.ID == MaSp);
+            if (sp == null)
+            {
+                /*Đường dẫn không hợp lệ*/
+                Response.StatusCode = 404;
+                return null;
+            }
+            /*Lấy giỏ hàng*/
+            List<ItemGioHang> lstGioHang = LayGioHang();
+            ItemGioHang spCheck = lstGioHang.SingleOrDefault(n => n.IDSanPham == MaSp);
+
+            if (spCheck != null)
+            {
+                if (sp.CoSan == false)
+                {
+                    return View("ThongBao");
+                }
+                spCheck.SoLuong++;
+                spCheck.ThanhTien = spCheck.Gia * spCheck.SoLuong;
+                ViewBag.TongSoLuong = TinhTongSoLuong();
+                ViewBag.TongTien = TinhTongTien();
+                return PartialView("GioHangPartial");
+            }
+            if (sp.CoSan == false)
+            {
+                return View("ThongBao");
+            }
+            ItemGioHang itemGH = new ItemGioHang(MaSp);
+            lstGioHang.Add(itemGH);
+            ViewBag.TongSoLuong = TinhTongSoLuong();
+            ViewBag.TongTien = TinhTongTien();
+            return PartialView("GioHangPartial");
+        }
     }
 }

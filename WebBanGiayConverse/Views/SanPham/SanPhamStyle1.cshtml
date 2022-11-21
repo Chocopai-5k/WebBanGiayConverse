@@ -6,7 +6,7 @@
         {
             <div class="col-md-4 grid-top">
                 <a href="@Url.Action("XemChiTiet","SanPham", new { id = item.ID })" class="b-link-stripe b-animate-go  thickbox">
-                    <img class="img-responsive" src="@Url.Content(item.Anh)" alt="">
+                    <img class="img-responsive" src="@Url.Content("/Content/images"+item.Anh)" alt="">
                     <div class="b-wrapper">
                         <h3 class="b-animate b-from-left b-delay03 ">
                             <span>@item.Gia.Value.ToString("#,##") VNĐ</span>

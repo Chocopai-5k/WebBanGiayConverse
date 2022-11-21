@@ -8,18 +8,18 @@
            <div class="col-md-5 single-top">
                <div class="flexslider">
                    <ul class="slides">
-                       <li data-thumb="@Url.Content(Model.Anh1)">
-                           <img src="@Url.Content(Model.Anh1)" />
+                       <li data-thumb="@Url.Content("/Content/images"+Model.Anh1)">
+                           <img src="@Url.Content("/Content/images"+Model.Anh1)" />
                        </li>
-                       <li data-thumb="@Url.Content(Model.Anh2)">
-                           <img src="@Url.Content(Model.Anh2)" />
+                       <li data-thumb="@Url.Content("/Content/images"+Model.Anh2)">
+                           <img src="@Url.Content("/Content/images"+Model.Anh2)" />
                        </li>
 
-                       <li data-thumb="@Url.Content(Model.Anh3)">
-                           <img src="@Url.Content(Model.Anh3)" />
+                       <li data-thumb="@Url.Content("/Content/images"+Model.Anh3)">
+                           <img src="@Url.Content("/Content/images"+Model.Anh3)" />
                        </li>
-                       <li data-thumb="@Url.Content(Model.Anh4)">
-                           <img src="@Url.Content(Model.Anh4)" />
+                       <li data-thumb="@Url.Content("/Content/images"+Model.Anh4)">
+                           <img src="@Url.Content("/Content/images"+Model.Anh4)" />
                        </li>
                    </ul>
                </div>
@@ -52,11 +52,11 @@ $(window).load(function() {
                             <div class="clearfix"> </div>
                         </div>
 
-                        <h5 class="item_price">@Model.Gia Đ</h5>
+                        <h5 class="item_price">@Model.Gia.Value.ToString("#,##") VNĐ</h5>
                         <p>
                            @Model.MoTa
                         </p>
-
+                        @Ajax.ActionLink("Thêm giỏ hàng", "ThemGioHangAjax", "GioHang" ,new { @MaSp = Model.ID, @strURL = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divGioHang", InsertionMode = InsertionMode.Replace  }, null)
                         <a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSp = Model.ID, @strURL = Request.Url.ToString()})" class="add-cart item_add">ADD TO CART</a>
                     </div>
                 </div>

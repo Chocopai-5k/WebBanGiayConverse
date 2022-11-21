@@ -107,7 +107,7 @@ a.item_add {
 	position: absolute;
 	outline: none;
 	 top: 0px;
-  right: 0px;
+  right: -30px;
   background: #c7c7c7;
   font-size: 1.2em;
   color: #000;

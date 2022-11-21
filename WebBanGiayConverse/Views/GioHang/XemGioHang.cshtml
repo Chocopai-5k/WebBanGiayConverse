@@ -5,9 +5,9 @@
     Layout = "~/Views/Layout/ProductLayout.cshtml";
 }
 
-@if(Model == null)
+@if(Model == null || Model.Count == 0)
 {
-<h1>Giỏ hàng rỗng</h1>
+    <h1>Giỏ hàng rỗng</h1>
 }
 else
 {
@@ -26,13 +26,28 @@ else
             <td>@item.IDSanPham</td>
             <td>@item.TenSp</td>
             <td>
-                <img src="@Url.Content(item.HinhAnh)" width="80px" height="80px"/>
+                <img src="@Url.Content(item.HinhAnh)" width="150px" height="150px" />
             </td>
             <td>@item.SoLuong</td>
             <td>@item.Gia.ToString("#,##") VNĐ</td>
             <td>@item.ThanhTien.ToString("#,##") VNĐ</td>
+            <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSp = item.IDSanPham })
+            
+            </td>
+            <td>
+                @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSp = item.IDSanPham })
+            </td>
+
         </tr>
         }
     </table>
+    <div class="DatHang">
+        @using (Html.BeginForm("DatHang", "GioHang"))
+                {
+                    <input type="submit" value="Đặt hàng" style="padding:7px 12px"/>
+                    @Html.ActionLink("Mua tiếp", "Index", "Home", new {@class="btn btn-success"})
+                }
+
+    </div>
 }
 
