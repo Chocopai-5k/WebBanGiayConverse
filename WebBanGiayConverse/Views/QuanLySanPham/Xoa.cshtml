@@ -1,7 +1,7 @@
 ﻿@model  WebBanGiayConverse.Models.SanPham
 
 @{
-    ViewBag.Title = "Them";
+    ViewBag.Title = "Xóa";
     Layout = "~/Views/Layout/AdminLayout.cshtml";
 }
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
@@ -9,15 +9,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
+    $(function () {
+        $("#datepicker").datepicker();
+    });
 </script>
-<h2>Thêm mới sản phẩm</h2>
+<h2>Xóa sản phẩm</h2>
 
-@using (Html.BeginForm("Them", "QuanLySanPham", FormMethod.Post, new {@enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Xoa", "QuanLySanPham", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.Hidden("ID", Model.ID)
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -66,8 +68,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Anh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="imageUpdate" />
+                <input name="Anh" type="file" />
                 <span style="color:rebeccapurple">@ViewBag.upload</span>
+                <img src="@Url.Content("~/Content/HinhAnhSP/"+Model.Anh)" width="150px" height="150px" />
             </div>
         </div>
         <div class="form-group">
@@ -80,7 +83,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Thêm" class="btn btn-default" />
+                <input type="submit" value="Xóa" class="btn btn-danger" />
             </div>
         </div>
     </div>
@@ -89,5 +92,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-

@@ -26,7 +26,7 @@ else
             <td>@item.IDSanPham</td>
             <td>@item.TenSp</td>
             <td>
-                <img src="@Url.Content(item.HinhAnh)" width="150px" height="150px" />
+                <img src="@Url.Content("~/Content/HinhAnhSP/"+item.HinhAnh)" width="150px" height="150px" />
             </td>
             <td>@item.SoLuong</td>
             <td>@item.Gia.ToString("#,##") VNĐ</td>
@@ -42,7 +42,7 @@ else
         }
     </table>
     <div class="DatHang">
-        @using (Html.BeginForm("DatHang", "GioHang"))
+        @using (Html.BeginForm("Index", "Home"))
                 {
                     <input type="submit" value="Đặt hàng" style="padding:7px 12px"/>
                     @Html.ActionLink("Mua tiếp", "Index", "Home", new {@class="btn btn-success"})

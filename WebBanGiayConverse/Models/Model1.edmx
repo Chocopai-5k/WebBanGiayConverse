@@ -58,10 +58,6 @@
           <Property Name="IDLoaiSanPham" Type="bigint" />
           <Property Name="MoTa" Type="nvarchar(max)" />
           <Property Name="Anh" Type="nvarchar(max)" />
-          <Property Name="Anh1" Type="nvarchar(max)" />
-          <Property Name="Anh2" Type="nvarchar(max)" />
-          <Property Name="Anh3" Type="nvarchar(max)" />
-          <Property Name="Anh4" Type="nvarchar(max)" />
           <Property Name="Gia" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -235,10 +231,6 @@
           <Property Name="IDLoaiSanPham" Type="Int64" />
           <Property Name="MoTa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Anh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Anh1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Anh2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Anh3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Anh4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Gia" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK_ChiTietHoaDon_SanPham" FromRole="SanPham" ToRole="ChiTietHoaDon" />
           <NavigationProperty Name="TheLoai" Relationship="Self.FK_SanPham_TheLoai" FromRole="SanPham" ToRole="TheLoai" />
@@ -412,10 +404,6 @@
                 <ScalarProperty Name="IDLoaiSanPham" ColumnName="IDLoaiSanPham" />
                 <ScalarProperty Name="MoTa" ColumnName="MoTa" />
                 <ScalarProperty Name="Anh" ColumnName="Anh" />
-                <ScalarProperty Name="Anh1" ColumnName="Anh1" />
-                <ScalarProperty Name="Anh2" ColumnName="Anh2" />
-                <ScalarProperty Name="Anh3" ColumnName="Anh3" />
-                <ScalarProperty Name="Anh4" ColumnName="Anh4" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
               </MappingFragment>
             </EntityTypeMapping>
