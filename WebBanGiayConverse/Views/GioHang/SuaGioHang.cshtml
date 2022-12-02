@@ -29,7 +29,7 @@
                     <td>@item.IDSanPham @Html.Hidden("IDSanPham", item.IDSanPham)</td>
                     <td>@item.TenSp</td>
                     <td>
-                        <img src="@Url.Content(item.HinhAnh)" width="150px" height="150px" />
+                        <img src="@Url.Content("~/Content/HinhAnhSP/"+item.HinhAnh)" width="150px" height="150px" />
                     </td>
                     <td>@Html.TextBox("SoLuong", item.SoLuong) </td>
                     <td>@item.Gia.ToString("#,##") VNĐ</td>

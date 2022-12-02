@@ -42,10 +42,9 @@ else
         }
     </table>
     <div class="DatHang">
-        @using (Html.BeginForm("Index", "Home"))
+        @using (Html.BeginForm("DatHang", "GioHang"))
                 {
                     <input type="submit" value="Đặt hàng" style="padding:7px 12px"/>
-                    @Html.ActionLink("Mua tiếp", "Index", "Home", new {@class="btn btn-success"})
                 }
 
     </div>

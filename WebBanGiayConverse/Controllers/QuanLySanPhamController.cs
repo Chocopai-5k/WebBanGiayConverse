@@ -16,6 +16,7 @@ namespace WebBanGiayConverse.Controllers
         public ActionResult Index()
         {
             return View(db.SanPhams.ToList());
+
         }
         [HttpGet]
         public ActionResult Them()

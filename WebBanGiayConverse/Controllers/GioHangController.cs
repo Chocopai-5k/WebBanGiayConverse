@@ -201,5 +201,10 @@ namespace WebBanGiayConverse.Controllers
             ViewBag.TongTien = TinhTongTien();
             return PartialView("GioHangPartial");
         }
+        public ActionResult DatHang()
+        {
+            Session["GioHang"] = null;
+            return RedirectToAction("XemGioHang");
+        }
     }
 }
