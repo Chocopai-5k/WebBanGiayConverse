@@ -68,7 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Anh, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input name="imageUpdate" type="file"  />
+                <input name="imageUpdate" type="file"  src="@Url.Content("~/Content/HinhAnhSP/"+Model.Anh)"/>
                 <span style="color:rebeccapurple">@ViewBag.upload</span>
                 <img src="@Url.Content("~/Content/HinhAnhSP/"+Model.Anh)" width="150px" height="150px"/>
             </div>

@@ -35,7 +35,7 @@ namespace WebBanGiayConverse.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult DangKi(NguoiDung nd)
+        public ActionResult DangKi(NguoiDung nd, FormCollection f)
         {
             //Kiểm tra captcha hơp lệ
             if(this.IsCaptchaValid("Captcha không hợp lệ "))

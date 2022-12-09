@@ -20,7 +20,7 @@ namespace WebBanGiayConverse.Controllers
                 page = 1;
             }
             //Thực hiện chức năng phân trang
-            int pageSize = 2;
+            int pageSize = 3;
             //Số trang hiện tại
             int pageNumber = (page ?? 1);
             var lstSP = db.SanPhams.Where(n => n.Ten.Contains(sTuKhoa));

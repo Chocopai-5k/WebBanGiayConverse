@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace WebBanGiayConverse.Controllers
             {
                 ViewBag.LoaiSP = new SelectList(db.TheLoais.ToList(), "ID", "Ten");
 
-                if (sp.imageUpdate.ContentLength > 0)
+                if (sp.imageUpdate !=  null)
                 {
                     string filename = Path.GetFileNameWithoutExtension(sp.imageUpdate.FileName);
                     string extension = Path.GetExtension(sp.imageUpdate.FileName);
@@ -39,6 +39,7 @@ namespace WebBanGiayConverse.Controllers
                     sp.Anh = filename;
                     sp.imageUpdate.SaveAs(Path.Combine(Server.MapPath("~/Content/HinhAnhSP/"), filename));
                 }
+
                     db.SanPhams.Add(sp);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -70,7 +71,7 @@ namespace WebBanGiayConverse.Controllers
         public ActionResult ChinhSua(SanPham model)
         {
             ViewBag.LoaiSP = new SelectList(db.TheLoais.OrderBy(n => n.ID), "ID", "Ten", model.IDLoaiSanPham);
-            if (model.imageUpdate.ContentLength > 0)
+            if (model.imageUpdate != null)
             {
                 string filename = Path.GetFileNameWithoutExtension(model.imageUpdate.FileName);
                 string extension = Path.GetExtension(model.imageUpdate.FileName);

@@ -10,6 +10,7 @@
     <h1>Register</h1>
     @using (Html.BeginForm())
     {
+        @Html.ValidationSummary(true)
         <div class="col-md-4 register-top-grid">
             <h3>Thông tin cá nhân</h3>
             <div>
@@ -17,7 +18,6 @@
                 @Html.TextBox("Ten")
                 <p style="color:rebeccapurple">
                 @Html.ValidationMessageFor(model=>model.Ten)
-
                 </p>
             </div>
             <div>
@@ -31,8 +31,6 @@
                 <span>Địa chỉ</span>
                 @Html.TextBox("DiaChi")
                 @Html.ValidationMessageFor(model => model.DiaChi)
-
-
             </div>
             <div>
                 <span>Số điện thoại</span>
@@ -60,6 +58,8 @@
             <div>
                 <span>Nhập lại mật khẩu</span>
                 @Html.Password("NhapLaiMatKhau")
+                @Html.ValidationMessageFor(model => model.MatKhau)
+
             </div>
             <div>
                 @Html.MathCaptcha()

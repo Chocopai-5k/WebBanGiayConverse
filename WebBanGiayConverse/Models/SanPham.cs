@@ -9,10 +9,10 @@
 
 namespace WebBanGiayConverse.Models
 {
+    using System.Web;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class SanPham
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,7 +33,7 @@ namespace WebBanGiayConverse.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual TheLoai TheLoai { get; set; }
-        [NotMapped]
-        public System.Web.HttpPostedFileBase imageUpdate { get; set; }
+        public HttpPostedFileBase imageUpdate { get; set; }
+
     }
 }
