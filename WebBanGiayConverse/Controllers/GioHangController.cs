@@ -10,6 +10,16 @@ namespace WebBanGiayConverse.Controllers
     public class GioHangController : Controller
     {
         ShopGiayConverseEntities db = new ShopGiayConverseEntities();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                    db.Dispose();
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
         public List<ItemGioHang> LayGioHang() 
         {
             /*Giỏ hàng đã tồn tại*/
@@ -25,7 +35,7 @@ namespace WebBanGiayConverse.Controllers
         /*Thêm giỏ hàng*/
         public ActionResult ThemGioHang(int MaSp, string strURL)
         {
-            SanPham sp = db.SanPhams.SingleOrDefault(n => n.ID == MaSp);
+            SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSP == MaSp);
             if(sp == null)
             {
                 /*Đường dẫn không hợp lệ*/
@@ -105,7 +115,7 @@ namespace WebBanGiayConverse.Controllers
                 return RedirectToAction("Index", "Home");
 
             }
-            SanPham sp = db.SanPhams.SingleOrDefault(n => n.ID == MaSp);
+            SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSP == MaSp);
             if (sp == null)
             {
                 /*Đường dẫn không hợp lệ*/
@@ -127,7 +137,7 @@ namespace WebBanGiayConverse.Controllers
         [HttpPost]
         public ActionResult CapNhatGioHang(ItemGioHang itemGH)
             {
-            SanPham spCheck = db.SanPhams.Single(n => n.ID == itemGH.IDSanPham);
+            SanPham spCheck = db.SanPhams.Single(n => n.MaSP == itemGH.IDSanPham);
             if (spCheck.CoSan == false)
             {
                 return View("ThongBao");
@@ -149,7 +159,7 @@ namespace WebBanGiayConverse.Controllers
                 return RedirectToAction("Index", "Home");
 
             }
-            SanPham sp = db.SanPhams.SingleOrDefault(n => n.ID == MaSp);
+            SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSP == MaSp);
             if (sp == null)
             {
                 /*Đường dẫn không hợp lệ*/
@@ -168,7 +178,7 @@ namespace WebBanGiayConverse.Controllers
         }
         public ActionResult ThemGioHangAjax(int MaSp, string strURL)
         {
-            SanPham sp = db.SanPhams.SingleOrDefault(n => n.ID == MaSp);
+            SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSP == MaSp);
             if (sp == null)
             {
                 /*Đường dẫn không hợp lệ*/
@@ -201,10 +211,55 @@ namespace WebBanGiayConverse.Controllers
             ViewBag.TongTien = TinhTongTien();
             return PartialView("GioHangPartial");
         }
-        public ActionResult DatHang()
+        public ActionResult DatHang(NguoiDung nd)
         {
+            if(Session["GioHang"] == null)
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
+            NguoiDung nguoiDung = new NguoiDung();
+            if (Session["TaiKhoan"] == null)
+            {
+                nguoiDung = nd;
+                db.NguoiDungs.Add(nguoiDung);
+                db.SaveChanges();
+            }
+            else
+            {
+                NguoiDung tv = Session["TaiKhoan"] as NguoiDung;
+                nguoiDung.Ten = tv.Ten;
+                nguoiDung.DiaChi = tv.DiaChi;
+                nguoiDung.Email = tv.Email;
+                nguoiDung.SoDienThoai = tv.SoDienThoai;
+                db.NguoiDungs.Add(nguoiDung);
+                db.SaveChanges();
+            }
+            //Thêm đơn hàng
+            DonDatHang ddh = new DonDatHang();
+            ddh.MaND = nguoiDung.MaND;
+            ddh.NgayDat = DateTime.Now;
+            ddh.TinhTrangGiaoHang = false;
+            ddh.DaThanhToan = false;
+            ddh.UuDai = 0;
+            db.DonDatHangs.Add(ddh);
+            db.SaveChanges();
+            //Thêm chi tiết đơn đặt hàng
+            List<ItemGioHang> lstGH = LayGioHang();
+            foreach(var item in lstGH)
+            {
+                ChiTietDonDatHang ctdh = new ChiTietDonDatHang();
+                ctdh.MaDDH = ddh.MaDDH;
+                ctdh.MaSP = item.IDSanPham;
+                ctdh.TenSP = item.TenSp;
+                ctdh.SoLuong = item.SoLuong;
+                ctdh.DonGia = item.Gia;
+                db.ChiTietDonDatHangs.Add(ctdh);
+            }
+            db.SaveChanges();
             Session["GioHang"] = null;
             return RedirectToAction("XemGioHang");
         }
+
     }
 }

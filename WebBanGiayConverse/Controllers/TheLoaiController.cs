@@ -12,6 +12,16 @@ namespace WebBanGiayConverse.Controllers
     {
         // GET: TheLoai
         ShopGiayConverseEntities db = new ShopGiayConverseEntities();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                    db.Dispose();
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         public ActionResult Index()
         {
@@ -69,7 +79,7 @@ namespace WebBanGiayConverse.Controllers
                 Response.StatusCode = 404;
                 return null;
             }
-            TheLoai sp = db.TheLoais.SingleOrDefault(n => n.ID == id);
+            TheLoai sp = db.TheLoais.SingleOrDefault(n => n.MaLoai == id);
             if (sp == null)
             {
                 return HttpNotFound();
@@ -84,7 +94,7 @@ namespace WebBanGiayConverse.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            TheLoai model = db.TheLoais.SingleOrDefault(n => n.ID == id);
+            TheLoai model = db.TheLoais.SingleOrDefault(n => n.MaLoai == id);
             if (model == null)
             {
                 return HttpNotFound();

@@ -1,0 +1,50 @@
+﻿@using WebBanGiayConverse.Models
+@model IEnumerable<DonDatHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    //Khởi tạo webgrid
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 5);
+}
+<h2>Quản lý đơn hàng </h2>
+<br />
+<ul class="nav nav-pills">
+    <li role="presentation" class="active"><a href="@Url.Action("ChuaThanhToan", "QuanLyDonHang")">Chưa thanh toán</a></li>
+    <li role="presentation"><a href="@Url.Action("ChuaGiao", "QuanLyDonHang")">Chưa giao</a></li>
+    <li role="presentation"><a href="@Url.Action("DaGiaoDaThanhToan", "QuanLyDonHang")">Đã giao đã thanh toán</a></li>
+</ul>
+<br />
+@grid.GetHtml(
+    tableStyle: "gridTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltRow",
+    columns: grid.Columns(
+        grid.Column("MaDDH", header: "Mã đơn hàng"),
+        grid.Column("MaND", header: "Tên khách hàng", format: p => p.MaND != null ? p.NguoiDung.Ten : ""),
+        grid.Column("NgayDat", header: "Ngày đặt"),
+        grid.Column("TinhTrangGiaoHang", header: "Tình trạng giao hàng"),
+        grid.Column("NgayGiao", header: "Ngày giao"),
+        grid.Column("DaThanhToan", header: "Đã thanh toán"),
+        grid.Column(format: p => @Html.ActionLink("Duyệt đơn hàng", "DuyetDonHang", new { id = p.MaDDH }))
+        ))
+
+<style>
+    .gridTable {
+        width: 100%;
+        border: 1px solid #999999;
+    }
+
+        .gridTable td {
+            border: 1px solid #999999
+        }
+</style>
+
+<style>
+    .FooterAdmin {
+        display: none;
+    }
+</style>
+
+

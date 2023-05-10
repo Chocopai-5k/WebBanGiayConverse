@@ -29,7 +29,7 @@ $(window).load(function() {
                 </div>
                 <div class="col-md-7 single-top-in simpleCart_shelfItem">
                     <div class="single-para ">
-                        <h4>@Model.Ten</h4>
+                        <h4>@Model.TenSP</h4>
                         <div class="star-on">
                             <ul class="star-footer">
                                 <li><a href="#"><i> </i></a></li>
@@ -46,8 +46,8 @@ $(window).load(function() {
                         <p>
                            @Model.MoTa
                         </p>
-                        @Ajax.ActionLink("Thêm giỏ hàng", "ThemGioHangAjax", "GioHang" ,new { @MaSp = Model.ID, @strURL = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divGioHang", InsertionMode = InsertionMode.Replace  }, null)
-                        <a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSp = Model.ID, @strURL = Request.Url.ToString()})" class="add-cart item_add">ADD TO CART</a>
+                        @*@Ajax.ActionLink("Thêm giỏ hàng", "ThemGioHangAjax", "GioHang" ,new { @MaSp = Model.ID, @strURL = Request.Url.ToString() }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "divGioHang", InsertionMode = InsertionMode.Replace  }, null)*@
+                        <a href="@Url.Action("ThemGioHang", "GioHang", new { @MaSp = Model.MaSP, @strURL = Request.Url.ToString()})" class="add-cart item_add">ADD TO CART</a>
                     </div>
                 </div>
                 <div class="clearfix"> </div>

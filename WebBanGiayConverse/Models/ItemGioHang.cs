@@ -19,8 +19,8 @@ namespace WebBanGiayConverse.Models
             using (ShopGiayConverseEntities db = new ShopGiayConverseEntities())
             {
                 this.IDSanPham = IMaSP;
-                SanPham sp = db.SanPhams.Single(n => n.ID == IDSanPham);
-                this.TenSp = sp.Ten;
+                SanPham sp = db.SanPhams.Single(n => n.MaSP == IDSanPham);
+                this.TenSp = sp.TenSP;
                 this.HinhAnh = sp.Anh;
                 this.Gia = sp.Gia.Value;
                 this.SoLuong = 1;
@@ -32,8 +32,8 @@ namespace WebBanGiayConverse.Models
             using (ShopGiayConverseEntities db = new ShopGiayConverseEntities())
             {
                 this.IDSanPham = IMaSP;
-                SanPham sp = db.SanPhams.Single(n => n.ID == IDSanPham);
-                TenSp = sp.Ten;
+                SanPham sp = db.SanPhams.Single(n => n.MaSP == IDSanPham);
+                TenSp = sp.TenSP;
                 HinhAnh = sp.Anh;
                 Gia = sp.Gia.Value;
                 this.SoLuong = sl;

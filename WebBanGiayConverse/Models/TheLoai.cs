@@ -20,7 +20,7 @@ namespace WebBanGiayConverse.Models
             this.SanPhams = new HashSet<SanPham>();
         }
     
-        public long ID { get; set; }
+        public long MaLoai { get; set; }
         public string Ten { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

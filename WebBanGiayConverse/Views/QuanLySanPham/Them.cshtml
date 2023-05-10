@@ -1,4 +1,4 @@
-﻿@model  WebBanGiayConverse.Models.SanPham
+﻿@model WebBanGiayConverse.Models.SanPham
 
 @{
     ViewBag.Title = "Them";
@@ -13,19 +13,19 @@
     $( "#datepicker" ).datepicker();
   } );
 </script>
-<h2>Thêm mới sản phẩm</h2>
-
-@using (Html.BeginForm("Them", "QuanLySanPham", FormMethod.Post, new {@enctype = "multipart/form-data" }))
+<h2>Tạo mới sản phẩm</h2>
+@using (Html.BeginForm("Them", "QuanLySanPham", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
+        <h4></h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Ten, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TenSP, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TenSP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenSP, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -51,7 +51,7 @@
             @Html.LabelFor(model => model.IDLoaiSanPham, "Loại sản phẩm", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IDLoaiSanPham", (IEnumerable<SelectListItem>)ViewBag.LoaiSP, new { @class = "form-control" })
-                @*@Html.ValidationMessageFor(model => model.IDLoaiSanPham, "", new { @class = "text-danger" })*@
+                @Html.ValidationMessageFor(model => model.IDLoaiSanPham, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -70,6 +70,7 @@
                 <span style="color:rebeccapurple">@ViewBag.upload</span>
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Gia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -79,8 +80,42 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.MaNCC, "Nhà cung cấp", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaNCC", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaNSX, "Nhà sản xuất", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MaNSX", null, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MaNSX, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaLoai, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaLoai, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MaLoai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DaXoa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.DaXoa)
+                    @Html.ValidationMessageFor(model => model.DaXoa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Thêm" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -89,5 +124,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-

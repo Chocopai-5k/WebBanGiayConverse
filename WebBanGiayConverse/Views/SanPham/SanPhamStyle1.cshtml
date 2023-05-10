@@ -5,7 +5,7 @@
         @foreach (var item in Model)
         {
             <div class="col-md-4 grid-top">
-                <a href="@Url.Action("XemChiTiet","SanPham", new { id = item.ID })" class="b-link-stripe b-animate-go  thickbox">
+                <a href="@Url.Action("XemChiTiet","SanPham", new { id = item.MaSP })" class="b-link-stripe b-animate-go  thickbox">
                     <img class="img-responsive" src="@Url.Content("~/Content/HinhAnhSP/"+item.Anh)" alt="">
                     <div class="b-wrapper">
                         <h3 class="b-animate b-from-left b-delay03 ">
@@ -13,7 +13,7 @@
                         </h3>
                     </div>
                 </a>
-                <p><a href="@Url.Action("XemChiTiet","SanPham", new { id = item.ID })">@item.Ten</a></p>
+                <p><a href="@Url.Action("XemChiTiet","SanPham", new { id = item.MaSP })">@item.TenSP</a></p>
             </div>
         }
     </div>

@@ -14,10 +14,10 @@
     rowStyle: "gridRow",
     alternatingRowStyle: "gridAltRow",
     columns: grid.Columns(
-        grid.Column("ID", "Mã thể loại"),
+        grid.Column("MaLoai", "Mã thể loại"),
         grid.Column("Ten", "Tên thể loại"),
-        grid.Column(format: p => Html.ActionLink("Chỉnh sửa", "ChinhSua","TheLoai", new { id = p.ID })),
-        grid.Column(format: p => Html.ActionLink("Xóa", "Xoa", new { id = p.ID }))
+        grid.Column(format: p => Html.ActionLink("Chỉnh sửa", "ChinhSua", new { id = p.MaLoai })),
+        grid.Column(format: p => Html.ActionLink("Xóa", "Xoa", new { id = p.MaLoai }))
         ))
 
 <style>

@@ -9,7 +9,6 @@
 
 namespace WebBanGiayConverse.Models
 {
-    using System.Web;
     using System;
     using System.Collections.Generic;
     
@@ -18,22 +17,32 @@ namespace WebBanGiayConverse.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SanPham()
         {
+            this.ChiTietDonDatHangs = new HashSet<ChiTietDonDatHang>();
             this.ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
+            this.ChiTietPhieuNhaps = new HashSet<ChiTietPhieuNhap>();
         }
     
-        public long ID { get; set; }
-        public string Ten { get; set; }
+        public long MaSP { get; set; }
+        public string TenSP { get; set; }
         public Nullable<System.DateTime> NgaySanXuat { get; set; }
         public Nullable<bool> CoSan { get; set; }
         public Nullable<long> IDLoaiSanPham { get; set; }
         public string MoTa { get; set; }
         public string Anh { get; set; }
         public Nullable<decimal> Gia { get; set; }
+        public Nullable<long> MaNCC { get; set; }
+        public Nullable<long> MaNSX { get; set; }
+        public Nullable<long> MaLoai { get; set; }
+        public Nullable<bool> DaXoa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietDonDatHang> ChiTietDonDatHangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
+        public virtual NhaCungCap NhaCungCap { get; set; }
+        public virtual NhaSanXuat NhaSanXuat { get; set; }
         public virtual TheLoai TheLoai { get; set; }
-        public HttpPostedFileBase imageUpdate { get; set; }
-
     }
 }

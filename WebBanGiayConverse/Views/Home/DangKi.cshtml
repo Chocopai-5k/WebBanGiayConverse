@@ -16,27 +16,22 @@
             <div>
                 <span>Họ và tên</span>
                 @Html.TextBox("Ten")
-                <p style="color:rebeccapurple">
-                @Html.ValidationMessageFor(model=>model.Ten)
-                </p>
+                <span class="TenKH" style="color:red"></span>
             </div>
             <div>
                 <span>Email</span>
                 @Html.TextBox("Email")
-                @Html.ValidationMessageFor(model => model.Email)
-
-
+                <span class="EmailKH" style="color:red"></span>
             </div>
             <div>
                 <span>Địa chỉ</span>
                 @Html.TextBox("DiaChi")
-                @Html.ValidationMessageFor(model => model.DiaChi)
+                <span class="DiaChiKH" style="color:red"></span>
             </div>
             <div>
                 <span>Số điện thoại</span>
                 @Html.TextBox("SoDienThoai")
-                @Html.ValidationMessageFor(model => model.SoDienThoai)
-
+                <span class="SoDienThoaiKH" style="color:red"></span>
             </div>
 
         </div>
@@ -44,30 +39,85 @@
             <h3>Thông tin đăng nhập</h3>
             <div>
                 <span>Tài khoản</span>
-                @Html.TextBox("TaiKhoan")
-                @Html.ValidationMessageFor(model => model.TaiKhoan)
+                    @Html.TextBox("TaiKhoan")
+                <span class="loiNhapTaiKhoan" style="color:red"></span>
 
 
             </div>
             <div>
                 <span>Mật khẩu</span>
                 @Html.Password("MatKhau")
-                @Html.ValidationMessageFor(model => model.MatKhau)
-
+                <span class="MatKhauKH" style="color:red"></span>
             </div>
             <div>
                 <span>Nhập lại mật khẩu</span>
                 @Html.Password("NhapLaiMatKhau")
-                @Html.ValidationMessageFor(model => model.MatKhau)
-
+                <span class="NhapLaiMK" style="color:red"></span>
             </div>
             <div>
                 @Html.MathCaptcha()
             </div>
-            <input type="submit" value="submit">
+            <input type="submit" value="Đăng kí" id="btn_DangKi">
         </div>
         <div class="clearfix"> </div>
     }
     <h2 style="text-align:center; margin-top:40px">@ViewBag.ThongBao</h2>
 
 </div>
+<script>
+    $("#btn_DangKi").click(function () {
+        var loi = 0;
+        if ($("#MatKhau").val() == "") {
+            $(".MatKhauKH").text("Mật khẩu không được để trống")
+            loi++;
+        } else {
+            $(".MatKhauKH").text("");
+        }
+        if ($("#NhapLaiMatKhau").val() == "") {
+            $(".NhapLaiMK").text("Nhập lại không được để trống")
+            loi++;
+        } else {
+            $(".NhapLaiMK").text("");
+        }
+        if ($("#DiaChi").val() == "") {
+            $(".DiaChiKH").text("Địa chỉ không được để trống")
+            loi++;
+        } else {
+            $(".DiaChiKH").text("");
+        }
+        if ($("#TaiKhoan").val() == "") {
+            $(".loiNhapTaiKhoan").text("Tài khoản không được để trống")
+            loi++;
+
+        } else {
+            $(".loiNhapTaiKhoan").text("");
+        }
+        if ($("#Ten").val() == "") {
+            $(".TenKH").text("Tên không được để trống")
+            loi++;
+
+        } else {
+            $(".TenKH").text("");
+        }
+        var loi;
+        dinhdang = /^[0-9A-Za-z]+[0-9A-Za-z_]*@@[\w\d.]+\.\w{2,4}$/;
+        ktmail = dinhdang.test($("#Email").val());
+        if (!ktmail) {
+            $(".EmailKH").text("Email không hợp lệ")
+            loi++;
+        } else {
+            $("#Email").text("");
+        }
+        if ($("#SoDienThoai").val() == "") {
+            $(".SoDienThoaiKH").text("Số điện thoại không được để trống")
+            loi++;
+
+        } else {
+            $("#SoDienThoai").text("");
+        }
+
+        if (loi != 0) {
+            return false
+        }
+    })
+</script>

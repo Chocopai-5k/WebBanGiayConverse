@@ -11,6 +11,16 @@ namespace WebBanGiayConverse.Controllers
     public class TimKiemController : Controller
     {
         ShopGiayConverseEntities db = new ShopGiayConverseEntities();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                    db.Dispose();
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
         // GET: TimKiem
         [HttpGet]
         public ActionResult KQTimKiem(string sTuKhoa, int? page )
@@ -23,9 +33,9 @@ namespace WebBanGiayConverse.Controllers
             int pageSize = 3;
             //Số trang hiện tại
             int pageNumber = (page ?? 1);
-            var lstSP = db.SanPhams.Where(n => n.Ten.Contains(sTuKhoa));
+            var lstSP = db.SanPhams.Where(n => n.TenSP.Contains(sTuKhoa));
             ViewBag.TuKhoa = sTuKhoa;
-            return View(lstSP.OrderBy(n => n.Ten).ToPagedList(pageNumber, pageSize));
+            return View(lstSP.OrderBy(n => n.TenSP).ToPagedList(pageNumber, pageSize));
         }
         [HttpPost]
         public ActionResult LayTuKhoaTimKiem(string sTuKhoa)

@@ -12,6 +12,16 @@ namespace WebBanGiayConverse.Controllers
     {
         // GET: SanPham
         ShopGiayConverseEntities db = new ShopGiayConverseEntities();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                    db.Dispose();
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
         //Tạo 1 partial view sản phẩm để hiên thị theo 2 style khac nhau
         [ChildActionOnly]
         public ActionResult SanPhamStyle1()
@@ -27,7 +37,7 @@ namespace WebBanGiayConverse.Controllers
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
             }
-            SanPham sp = db.SanPhams.SingleOrDefault(n => n.ID == id);
+            SanPham sp = db.SanPhams.SingleOrDefault(n => n.MaSP == id);
             if(sp == null)
             {
                 return HttpNotFound();
@@ -58,7 +68,7 @@ namespace WebBanGiayConverse.Controllers
             //Số trang hiện tại
             int pageNumber = (page ?? 1);
             ViewBag.MaLoaiSP = IDLoaiSP;
-            return View(lstSP.OrderBy(n=>n.ID).ToPagedList(pageNumber, pageSize));
+            return View(lstSP.OrderBy(n=>n.MaSP).ToPagedList(pageNumber, pageSize));
         }
     }
 }

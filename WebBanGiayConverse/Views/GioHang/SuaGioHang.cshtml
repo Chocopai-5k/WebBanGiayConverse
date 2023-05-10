@@ -31,31 +31,52 @@
                     <td>
                         <img src="@Url.Content("~/Content/HinhAnhSP/"+item.HinhAnh)" width="150px" height="150px" />
                     </td>
-                    <td>@Html.TextBox("SoLuong", item.SoLuong) </td>
+                    <td>
+                        @Html.TextBox("SoLuong", item.SoLuong, new { @class = "SoLuongThayDoi" })
+                        <p id="TB_SoLuongThayDoi" style="color:red"></p>
+
+                    </td>
                     <td>@item.Gia.ToString("#,##") VNĐ</td>
                     <td>@item.ThanhTien.ToString("#,##") VNĐ</td>
-                    <td><input type="submit" value="Cập nhật" style="padding:10px" /></td>
+                    <td><input type="submit" value="Cập nhật" style="padding:10px" id="btn_CapNhatSoLuong" /></td>
                 </tr>
             }
 
         }
         else
         {
-<tr>
-    <td>@item.IDSanPham</td>
-    <td>@item.TenSp</td>
-    <td>
-        <img src="@Url.Content(item.HinhAnh)" width="150px" height="150px" />
-    </td>
-    <td>@item.SoLuong</td>
-    <td>@item.Gia.ToString("#,##") VNĐ</td>
-    <td>@item.ThanhTien.ToString("#,##") VNĐ</td>
-    <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSp = item.IDSanPham })</td>
-    <td>
-        @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSp = item.IDSanPham })
-    </td>
-</tr>
+            <tr>
+                <td>@item.IDSanPham</td>
+                <td>@item.TenSp</td>
+                <td>
+                    <img src="@Url.Content(item.HinhAnh)" width="150px" height="150px" />
+                </td>
+                <td>@item.SoLuong</td>
+                <td>@item.Gia.ToString("#,##") VNĐ</td>
+                <td>@item.ThanhTien.ToString("#,##") VNĐ</td>
+                <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSp = item.IDSanPham })</td>
+                <td>
+                    @Html.ActionLink("Xóa", "XoaGioHang", new { @MaSp = item.IDSanPham })
+                </td>
+            </tr>
         }
 
     }
 </table>
+@*
+    Kiểm tra cập nhật số lượng
+    
+*@
+<script>
+    $("#btn_CapNhatSoLuong").click(function () {
+        var soLuong = $(".SoLuongThayDoi").val();
+        if (isNaN(soLuong) == true || soLuong < 0) {
+            $("#TB_SoLuongThayDoi").text("Giá trị không hợp lệ")
+            return false;
+        }
+        //else {
+        //    $("#SoLuong").text("")
+
+        //}
+    });
+</script>

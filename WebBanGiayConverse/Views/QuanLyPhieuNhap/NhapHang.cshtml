@@ -1,0 +1,169 @@
+﻿@using WebBanGiayConverse.Models
+@model PhieuNhap
+@{
+    ViewBag.Title = "NhapHang";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+@{
+    IEnumerable<NhaCungCap> lstNCC = ViewBag.MaNCC as IEnumerable<NhaCungCap>;
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>
+
+<h2>Nhập hàng</h2>
+<br />
+@using (Html.BeginForm())
+{
+    <div class="">
+
+        <div class="col-lg-10">
+            <div class="col-lg-2">
+                Nhà cung cấp
+            </div>
+            <div class="col-lg-5">
+                <select class="MaNCC" name="MaNCC">
+                    @foreach (var item in lstNCC)
+                    {
+                        <option value="@item.MaNCC">@item.TenNCC</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <br />
+        <div class="col-lg-10">
+            <div class="col-lg-2">
+                Ngày nhập
+            </div>
+            <div class="col-lg-5">
+                <input name="NgayNhap" type="text" id="datepicker" />
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <table class="table tblChiTietPhieuNhap">
+            @{
+                IEnumerable<SanPham> lstSanPham = ViewBag.ListSanPham as IEnumerable<SanPham>;
+            }
+            <tr class="trAppend" style="display:none">
+                <td>
+                    <select class="ddlSanPham">
+                        @foreach (var item in lstSanPham)
+                        {
+                            <option value="@item.MaSP">@item.TenSP</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input name="" value="0" class="txtDonGia" />
+                </td>
+                <td>
+                    <input name="" value="0" class="txtSoLuongNhap" />
+                </td>
+                <td>
+                    <input  value="-" class="btnDelete btn-danger" style="width:30px;text-align:center;border:1px solid;cursor:pointer"/>
+                </td>
+            </tr>
+            <tr class="trFirstChild" data-id="-1">
+                <td>Sản phẩm</td>
+                <td>Đơn giá nhập</td>
+                <td>Số lượng nhập</td>
+                <td></td>
+
+            </tr>
+        </table>
+        <input type="button" value="+" class="btn btn-success" id="btnAdd" />
+        <input type="submit" value="Nhập hàng" class="btn btn-primary" id="btnNhapHang" />
+
+    </div>
+}
+
+<script>
+    $("#btnAdd").click(function () {
+        var id_cuoi = $(".tblChiTietPhieuNhap").find("tr:last-child").attr("data-id");
+        i = parseInt(id_cuoi) + 1
+        var tdNoiDung = $(".trAppend").html();
+        var trNoiDung = "<tr class=\"trAppended\" data-id=\"" + i + "\">" + tdNoiDung + "</tr>";
+        $(".tblChiTietPhieuNhap").append(trNoiDung);
+        loadIDLenThe();
+    })
+
+    function loadIDLenThe() {
+        $(".trAppended").each(function () {
+            var id = $(this).attr("data-id");
+            var nameMaPhieuNhap = "[" + id + "].MaPN";
+            var nameMaSanPham = "[" + id + "].MaSP";
+            var  nameDonGiaNhap = "[" + id + "].DonGiaNhap";
+            var nameSoLuongNhap = "[" + id + "].SoLuongNhap";
+            $(this).find(".ddlSanPham").attr("name", nameMaSanPham)
+            $(this).find(".txtDonGia").attr("name", nameDonGiaNhap)
+            $(this).find(".txtSoLuongNhap").attr("name", nameSoLuongNhap)
+
+
+        })
+    }
+    function capNhatID() {
+        var id_cuoi = $(".tblChiTietPhieuNhap").find(".trFirstChild").attr("data-id");
+        i = parseInt(id_cuoi) + 1
+
+        $(".trAppended").each(function () {
+            var id = i;
+            $(this).attr("data-id", i);
+            var nameMaSanPham = "[" + id + "].MaSP";
+            var nameDonGiaNhap = "[" + id + "].DonGiaNhap";
+            var nameSoLuongNhap = "[" + id + "].SoLuongNhap";
+            $(this).find(".ddlSanPham").attr("name", nameMaSanPham)
+            $(this).find(".txtDonGia").attr("name", nameDonGiaNhap)
+            $(this).find(".txtSoLuongNhap").attr("name", nameSoLuongNhap)
+            i++;
+        })
+    }
+
+    $("body").delegate(".btnDelete", "click", function () {
+        $(this).closest("tr").remove();
+        capNhatID();
+    })
+    $("#btnNhapHang").click(function () {
+        if (kiemTraGiaTri() == false) {
+            return false;
+        }
+        if (kiemTraSoLuong() == false) {
+            return false;
+        }
+    })
+    function kiemTraGiaTri() {
+        var bl = true
+        $(".txtDonGia").each(function () {
+            var giatri = $(this).val();
+            if (isNaN(giatri) == true) {
+                alert("Đơn giá không hợp lệ");
+                bt = false;
+                return bl;
+            }
+        })
+        return bl;
+    }
+    function kiemTraSoLuong() {
+        var bl = true;
+
+        $(".txtSoLuongNhap").each(function () {
+            var giatri = $(this).val();
+            if (isNaN(giatri) == true) {
+                alert("Số lượng không hợp lệ");
+                bt = false;
+                return bl;
+            }
+        })
+        return bl;
+    }
+</script>
+
+

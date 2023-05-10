@@ -14,12 +14,12 @@
     rowStyle: "gridRow",
     alternatingRowStyle: "gridAltRow",
     columns: grid.Columns(
-        grid.Column("ID", "Mã sản phẩm"),
-        grid.Column("Ten", "Tên sản phẩm"),
+        grid.Column("MaSP", "Mã sản phẩm"),
+        grid.Column("TenSP", "Tên sản phẩm"),
         //grid.Column("MoTa", "Mô tả sản phẩm", format:p=> Html.Raw(p.MoTa)),
         grid.Column("Anh", "Hình ảnh sản phẩm", format: p => Html.Raw("<img width=\"200\" height=\"200\"src=\"../Content/HinhAnhSP/" + p.Anh+"\">" )),
-        grid.Column(format: p=> Html.ActionLink("Chỉnh sửa", "ChinhSua", new {id=p.ID})),
-        grid.Column(format: p => Html.ActionLink("Xóa", "Xoa", new { id = p.ID }))
+        grid.Column(format: p=> Html.ActionLink("Chỉnh sửa", "ChinhSua", new {id=p.MaSP})),
+        grid.Column(format: p => Html.ActionLink("Xóa", "Xoa", new { id = p.MaSP }))
         ))
 
 <style>
