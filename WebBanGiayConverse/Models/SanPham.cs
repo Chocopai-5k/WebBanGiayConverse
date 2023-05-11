@@ -11,7 +11,8 @@ namespace WebBanGiayConverse.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class SanPham
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -44,5 +45,6 @@ namespace WebBanGiayConverse.Models
         public virtual NhaCungCap NhaCungCap { get; set; }
         public virtual NhaSanXuat NhaSanXuat { get; set; }
         public virtual TheLoai TheLoai { get; set; }
+        public HttpPostedFileBase imageUpdate { get; set; }
     }
 }

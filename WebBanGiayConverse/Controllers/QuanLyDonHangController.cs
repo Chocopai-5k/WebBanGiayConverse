@@ -7,7 +7,6 @@ using WebBanGiayConverse.Models;
 
 namespace WebBanGiayConverse.Controllers
 {
-    [Authorize(Roles = "Quantri")]
 
     public class QuanLyDonHangController : Controller
     {

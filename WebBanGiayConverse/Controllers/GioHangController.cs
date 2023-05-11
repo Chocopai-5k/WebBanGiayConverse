@@ -10,16 +10,7 @@ namespace WebBanGiayConverse.Controllers
     public class GioHangController : Controller
     {
         ShopGiayConverseEntities db = new ShopGiayConverseEntities();
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (db != null)
-                    db.Dispose();
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+      
         public List<ItemGioHang> LayGioHang() 
         {
             /*Giỏ hàng đã tồn tại*/
@@ -260,6 +251,15 @@ namespace WebBanGiayConverse.Controllers
             Session["GioHang"] = null;
             return RedirectToAction("XemGioHang");
         }
-
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (db != null)
+                    db.Dispose();
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

@@ -42,110 +42,110 @@ else
             </tr>
         }
     </table>
-    <div class="DatHang">
 
-        @using (Html.BeginForm("DatHang", "GioHang"))
 
+    using (Html.BeginForm("DatHang", "GioHang"))
+
+    {
+
+        if (Session["TaiKhoan"] == null)
         {
-            if (Session["TaiKhoan"] == null)
-            {
-
-                <div class="formDatHang">
-                    <table class="table" style="width:75% ">
-                        <tr>
-                            <td align="center" colspan="2">THÔNG TIN KHÁCH HÀNG</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="name">Họ tên:</label>
-                            </td>
-                            <td width="90%">
-                                @Html.TextBox("Ten")
-                                <p id="TenKH" style="color:red"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="name">Địa chỉ:</label>
-                            </td>
-                            <td>
-                                @Html.TextBox("DiaChi")
-                                <p id="DiaChiKH" style="color:red"></p>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="name">Email:</label>
-                            </td>
-                            <td>
-                                @Html.TextBox("Email")
-                                <p id="EmailKH" style="color:red"></p>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="name">Số điện thoại:</label>
-                            </td>
-                            <td>
-                                @Html.TextBox("SoDienThoai")
-                                <p id="SoDienThoaiKH" style="color:red"></p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            }
-            @*
-                kiem tra textbox
-            *@
 
 
-            <div class="btn_dathang" style="text-align:right">
-                <input type="submit" value="Đặt hàng" style="padding:6px 10px" id="btn_DatHang" />
+            <div class="formDatHang">
+                <table class="table" style="width:75% ">
+                    <tr>
+                        <td align="center" colspan="2">THÔNG TIN KHÁCH HÀNG</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="name">Họ tên:</label>
+                        </td>
+                        <td width="90%">
+                            @Html.TextBox("Ten")
+                            <p id="TenKH" style="color:red"></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="name">Địa chỉ:</label>
+                        </td>
+                        <td>
+                            @Html.TextBox("DiaChi")
+                            <p id="DiaChiKH" style="color:red"></p>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="name">Email:</label>
+                        </td>
+                        <td>
+                            @Html.TextBox("Email")
+                            <p id="EmailKH" style="color:red"></p>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="name">Số điện thoại:</label>
+                        </td>
+                        <td>
+                            @Html.TextBox("SoDienThoai")
+                            <p id="SoDienThoaiKH" style="color:red"></p>
+                        </td>
+                    </tr>
+                </table>
             </div>
+            <script type="text/javascript">
+                $("#btn_DatHang").click(function () {
+                    var loi = 0;
+                    if ($("#Ten").val() == "") {
+                        $("#TenKH").text("Tên không được để trống")
+                        loi++;
+
+                    } else {
+                        $("#TenKH").text("");
+                    }
+                    if ($("#DiaChi").val() == "") {
+                        $("#DiaChiKH").text("Địa chỉ không được để trống")
+                        loi++;
+
+                    } else {
+                        $("#DiaChi").text("");
+                    }
+                    var loi;
+                    dinhdang = /^[0-9A-Za-z]+[0-9A-Za-z_]@@[\w\d.]+\.\w{2,4}$/;
+                    ktmail = dinhdang.test($("#Email").val());
+                    if (!ktmail) {
+                        $("#EmailKH").text("Email không hợp lệ")
+                        loi++;
+                    } else {
+                        $("#Email").text("");
+                    }
+                    if ($("#SoDienThoai").val() == "") {
+                        $("#SoDienThoaiKH").text("Số điện thoại không được để trống")
+                        loi++;
+
+                    } else {
+                        $("#SoDienThoai").text("");
+                    }
+
+                    if (loi != 0) {
+                        return false;
+                    }
+                })
+            </script>
 
         }
+        <div class="divDatHang" style="text-align:right">
+            <input type="submit" value="Đặt hàng" class="btn btn-success" style="padding:6px 10px" id="btn_DatHang" />
 
-    </div>
+        </div>
+    }
+
+
 }
 
-<script>
-    $("#btn_DatHang").click(function () {
-        var loi = 0;
-        if ($("#Ten").val() == "") {
-            $("#TenKH").text("Tên không được để trống")
-            loi++;
 
-        } else {
-            $("#TenKH").text("");
-        }
-        if ($("#DiaChi").val() == "") {
-            $("#DiaChiKH").text("Địa chỉ không được để trống")
-            loi++;
 
-        } else {
-            $("#DiaChi").text("");
-        }
-        var loi;
-        dinhdang = /^[0-9A-Za-z]+[0-9A-Za-z_]*@@[\w\d.]+\.\w{2,4}$/;
-        ktmail = dinhdang.test($("#Email").val());
-        if (!ktmail) {
-            $("#EmailKH").text("Email không hợp lệ")
-            loi++;
-        } else {
-            $("#Email").text("");
-        }
-        if ($("#SoDienThoai").val() == "") {
-            $("#SoDienThoaiKH").text("Số điện thoại không được để trống")
-            loi++;
-
-        } else {
-            $("#SoDienThoai").text("");
-        }
-
-        if (loi != 0) {
-            return false
-        }
-    })
-</script>
